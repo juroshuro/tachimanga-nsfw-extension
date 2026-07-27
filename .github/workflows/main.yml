@@ -1,0 +1,32 @@
+name: Build Extension APK
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Android APK
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build Extension APK
+        run: |
+          chmod +x gradlew || true
+          ./gradlew assembleRelease || gradle assembleRelease
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: tachiyomi-all.nsfwsource-v1.4.1.apk
+          path: src/all/nsfwsource/build/outputs/apk/release/*.apk
