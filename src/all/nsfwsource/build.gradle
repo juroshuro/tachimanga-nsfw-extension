@@ -1,0 +1,9 @@
+ext {
+    extName = 'NSFW Source (VPN-Free)'
+    pkgNameSuffix = 'all.nsfwsource'
+    extClass = '.NsfwSource'
+    extVersionCode = 1
+    isNsfw = true
+}
+
+apply from: "$rootDir/common.gradle"
